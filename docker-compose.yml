@@ -1,0 +1,35 @@
+# ============================================================
+# SkillBin — Local Development Services
+#
+# Starts a PostgreSQL 16 instance only.
+# Backend and frontend are run separately via uv / npm.
+#
+# Usage:
+#   docker compose up -d          # start postgres in background
+#   docker compose down           # stop and remove containers
+#   docker compose down -v        # also wipe the DB volume
+# ============================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: skillbin_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: skillbin
+      POSTGRES_PASSWORD: skillbin
+      POSTGRES_DB: skillbin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skillbin -d skillbin"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  postgres_data:
+    name: skillbin_postgres_data
