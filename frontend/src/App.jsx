@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 
 /**
  * App.jsx — Top-level router shell.
  *
- * Phase 0: single route to the placeholder landing page.
+ * Phase 2: /login added.
  * Future phases will add:
- *   /login          (Phase 2)
  *   /dashboard      (Phase 7)
  *   /employees      (Phase 3)
  *   /projects       (Phase 4)
@@ -16,8 +16,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* Phase 2+ routes will be registered here */}
+        <Route path="/"      element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        {/* Phase 3+ routes will be registered here */}
       </Routes>
     </BrowserRouter>
   );
